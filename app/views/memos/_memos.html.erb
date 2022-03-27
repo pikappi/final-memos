@@ -1,0 +1,22 @@
+<% if memos.any? %>
+  <ul class="list-unstyled mt-2">
+    <% memos.each do |memo| %>
+      <li class="d-flex">
+        <div>
+          <div>
+            <%= link_to memo.user.name, user_path(memo.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= memo.created_at %></span>
+          </div>
+          <div>
+            <p><%= memo.content %></p>
+          </div>
+          <div>
+            <% if current_user == memo.user %>
+              <%= link_to "Delete", memo, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%== pagy_bootstrap_nav(@pagy) %>
+<% end %>
